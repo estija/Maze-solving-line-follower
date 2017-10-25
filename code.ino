@@ -78,7 +78,7 @@ void setup(){
       analogWrite(mlp,0);
       analogWrite(mrp,0);
       }
- 
+
     void go(){
       digitalWrite(mlf,HIGH);
       digitalWrite(mrf,HIGH);
@@ -90,6 +90,7 @@ void setup(){
       }     
 
 void update_node(){ //checks which type of node it is
+//Serial.println("update node");
   digitalWrite(ledr,HIGH);
   digitalWrite(ledg,HIGH);
   digitalWrite(ledb,HIGH);
@@ -166,7 +167,8 @@ else if(all_white){
   } 
   } 
   }
-        
+      
+    
     void motor(){
       derr=err-perr;
       corr=kp*err+kd*derr;
@@ -328,37 +330,7 @@ else if(all_white){
         analogWrite(mrp,mrt+10);
       }
       }
-     
-  /*start*/
- /* up=1
- * left=2
- * down=3
- * right=4
- */
- /*void LT_node(){
-  if(dir[i-1]==4) dir[i]=1;
-   else dir[i]=dir[i-1]+1;
-  }
-   void RT_node(){
-  if(dir[i-1]==1) dir[i]=4;
-  else dir[i]=dir[i-1]-1;
-  }
-  void tb_node(){
-    if((dir[i-1]==1)||(dir[i-1]==2))
-      dir[i]=dir[i-1]+2;
-      else
-       dir[i]=dir[i-1]-2;
-      }
-      
-bool test_loops(){
-  }
-  
-  void test(){
-    if((i>1)&&(abs(dir[i-1]-dir[i-2])==2)){
-      dir[i-1]=0;
-      dir[i-2]=0; 
-      i=i-2;}
-    }*/
+
 void LT_node(){
   if(dir[i-1]==+1) dir[i]=-2;
    else if(dir[i-1]==-2) dir[i]=-1;
@@ -372,7 +344,7 @@ void LT_node(){
  else if(dir[i-1]==-1) dir[i]=-2;
  else if(dir[i-1]==+2) dir[i]=-1;
   }
-  
+
   void tb_node(){
    dir[i]=-dir[i-1];
    }
@@ -386,36 +358,6 @@ void LT_node(){
       i=i-2;
       }
     }
-    
-    /*void test_loops(){
-    dist[i]=(millis()-tl);
-    //for(int j=i;j>0;j--){
-    //distance=dist[j]*dir[j];
-   // total_dist=total_dist+distance;
-    //if(total_dist==0)
-    //}
-    //for(int k=i;k>j;k--){dist[k]=0;
-    //dir[i]=0;}
-    if(dir[i-1]==2){x[i]=x[i-1];
-    y[i]=y[i-1]+dist[i];}
-    else if(dir[i-1]==-2){x[i]=x[i-1];
-    y[i]=y[i-1]-dist[i];}
-    else if(dir[i-1]==1){x[i]=x[i-1]+dist[i];
-    y[i]=y[i-1];}
-    else if(dir[i-1]==-1){x[i]=x[i-1]-dist[i];
-    y[i]=y[i-1];}
-  
-   for(int j=i-1;j>=0;j--){
-     if((x[i]==x[j])&&(y[j]==y[i])){
-     for(int k=j;k<=i;k++){
-     dir[k]=0;
-     x[k-1]=0;
-     y[k-1]=0;
-     }
-     i=i-j;
-     }
-  else continue;}
-    }*/
 
 void dry_run(){
  dir[0]=1;
@@ -467,16 +409,6 @@ void dry_run(){
         analogWrite(mrp,mrs);
         }
         update_node();
-        /*if(all_white){
-         //digitalWrite(led,HIGH);
-         end_dry=1;
-         t=millis();
-         while(millis()<t+5000) pause();
-  }
-  else{
-    turn_left(0);
-  LT_node();
-   i++;}*/
    if(!end_dry){
   turn_left(0);
   LT_node();
